@@ -12,7 +12,6 @@ The files in this directory define a beamer theme using University of Idaho colo
 
 ## Usage
 >[!TIP] 
-> LaTeX Toolkit
 > I have written a Lua script to simplify LaTeX project creation and management. For Linux(Ubuntu and Pop!OS) users I highly recommend taking advantage of its features to simplify working with LaTeX/Beamer. Find it [here](https://github.com/grwells/latex-toolkit.git)
 
 1. Import into latex project. Place contents of directory at same level as your main LaTeX document file.
