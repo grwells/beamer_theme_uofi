@@ -11,7 +11,8 @@ The files in this directory define a beamer theme using University of Idaho colo
 > This theme uses logos from the University of Idaho. Thus users must adhere to conditions of use according to the University policies. See usage conditions [at U of I's logo guide.](https://www.uidaho.edu/brand/brand-style-guide#logo)
 
 ## Usage
->[!TIP] LaTeX Toolkit
+>[!TIP] 
+> LaTeX Toolkit
 > I have written a Lua script to simplify LaTeX project creation and management. For Linux(Ubuntu and Pop!OS) users I highly recommend taking advantage of its features to simplify working with LaTeX/Beamer. Find it [here](https://github.com/grwells/latex-toolkit.git)
 
 1. Import into latex project. Place contents of directory at same level as your main LaTeX document file.
