@@ -1,4 +1,7 @@
 # University of Idaho Themed Beamer Slides
+
+![example title slide]{./images/example_title_slide.png}
+
 The files in this directory define a beamer theme using University of Idaho colors, logos, etc. Users are encouraged to redefine options in `.sty` files to their preferences. Documentation on customization is primarily pulled from two resources:
 
 1. Stack Exchange: [Tikz PGF Custom Beamer Template](https://tex.stackexchange.com/questions/146529/design-a-custom-beamer-theme-from-scratch)
