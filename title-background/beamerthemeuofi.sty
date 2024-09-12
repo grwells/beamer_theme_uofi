@@ -1,0 +1,182 @@
+% https://tex.stackexchange.com/questions/146529/design-a-custom-beamer-theme-from-scratch
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\usetikzlibrary{positioning,calc}
+\RequirePackage{graphicx}
+
+\RequirePackage[sfdefault]{noto}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[most]{tcolorbox}
+
+\newcommand{\externallink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+% Settings
+%% Inner Theme
+
+% Background
+\begin{comment}
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fill[color=brown] (0,2) rectangle (\the\paperwidth,\the\paperheight);
+    \fill[color=orange] (0,0) rectangle(2.95,1.9);
+    \fill[color=blue!50!cyan!80] (3.05,0) rectangle(\the\paperwidth,1.9);
+    \ifnum\thepage>1\relax%
+        \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \fi
+    \end{tikzpicture}
+}
+\end{comment}
+
+\setbeamertemplate{background}
+{
+    \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fill[color=ui_black] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \ifnum\thepage>1\relax%
+        \fill[color=white] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \fi  
+    \end{tikzpicture}
+}
+
+% Title page
+%   note:   To set the title page background to black, or some other color
+%           just surround frame in {} and place
+%               \setbeamercolor{background canvas}{bg=ui_black}
+%           above the frame definition.
+%           Refer to 
+%               https://tex.stackexchange.com/questions/8043/change-the-background-color-of-a-frame-in-beamer
+%           for more information.
+\defbeamertemplate*{title page}{custom}[1][]
+{ 
+    
+  \begin{tikzpicture}[remember picture, overlay]
+        % TITLE SLIDE BACKGROUND
+        \node[inner sep=0pt,outer sep=0pt,anchor=north east] at (current page.north east)
+        {
+            \includegraphics[width=\the\paperwidth, height=\the\paperheight]{./title-background/ubuntu-background.jpg}
+        };
+
+        % TITLE SLIDE TITLE BANNER
+        \node
+        [
+            above=0.5cm,
+            align=center,
+            %fill=ui_brave_gold,
+            right color=ui_black,
+            %middle color=ui_black,
+            left color=ui_black,
+            fill opacity=0.8,
+            text opacity=1,
+            %top color = ui_black,
+            %bottom color = ui_brave_gold!70!ui_black,
+            %shading=ui_title_banner,
+            %rounded corners=0.5cm,
+            inner xsep=15pt,
+            inner ysep=10pt, 
+            minimum width=\paperwidth,
+            text width=0.9\textwidth
+        ] (title) at (current page.center)
+        {
+            \LARGE \textcolor{ui_brave_gold}{\inserttitle}\\[5pt]
+            \small \textcolor{ui_brave_gold!20}{\textit{\insertsubtitle}}
+        };
+
+        % TITLE SLIDE AUTHOR 
+        \node
+        [
+            below=1cm,
+            rounded corners=0.1cm,
+            fill=ui_black, 
+            text opacity=1, 
+            fill opacity=0.5,
+
+        ] (authordate) at (title.south)
+        {
+            
+            \begin{tabular}{c}
+            \textcolor{ui_silver}{\insertauthor} \\
+            \textcolor{ui_silver}{\large \insertdate}
+            \end{tabular}
+        };
+
+        % TITLE SLIDE LOGO
+        \node
+        [
+            below right =0.25cm and 0.5cm
+        ] at (current page.north west)
+        {
+            \includegraphics[width=3.5cm]{./logos/UI_Dept_CDA_Computer_Sci_horizontal_4c+W.png}
+        };
+
+    \end{tikzpicture}
+}
+
+%% Outer Theme
+% Frame title
+\begin{comment}
+\defbeamertemplate*{frametitle}{custom}[1][]
+{%
+  \begin{tcolorbox}[enhanced,sharp corners,spread upwards,frame hidden,boxrule=0pt,interior style tile={width=\paperwidth}{ubuntu-background.jpg},before skip=0pt,halign=center]
+    \usebeamercolor{frametitle}\color{fg}
+    \insertframetitle
+  \end{tcolorbox}
+}
+\end{comment}
+
+% Overrides default frame title style
+\begin{comment}
+\defbeamertemplate*{frametitle}{custom}[1][]
+{
+    \insertframetitle
+    \\
+    \insertframesubtitle
+}
+\end{comment}
+\definecolor{ui_brave_gold}{cmyk}{0, 0.105, 1, 0}
+\definecolor{ui_silver}{cmyk}{0,0,0, 0.196}
+\definecolor{ui_black}{rgb}{0,0,0}
+
+% Settings
+%\setbeamercolor*{title page header}{fg=white}
+%\setbeamercolor*{author}{fg=white}
+%\setbeamercolor*{date}{fg=white}
+%\setbeamercolor*{item}{fg=black}
+%\setbeamercolor*{frametitle}{fg=white}
+
+\setbeamercolor*{structure}{bg=ui_brave_gold,fg=ui_black}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=structure.fg!50!black}
+\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+\setbeamercolor{section in toc}{fg=black,bg=white}
+\setbeamercolor{alerted text}{use=structure,fg=structure.fg!50!black!80!black}
+\setbeamercolor{titlelike}{parent=palette primary,fg=structure.fg!50!black}
+\setbeamercolor{frametitle}{bg=ui_black,fg=ui_brave_gold}
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[shadow=false]  
+
+\mode<all>

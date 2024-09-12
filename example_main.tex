@@ -1,0 +1,117 @@
+\documentclass[aspectratio=169]{beamer}
+
+%% PACKAGES
+%\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[style=ieee]{biblatex}
+\usepackage{url}
+\usepackage{minted}
+\usepackage{pifont}  % special symbols
+\usepackage{animate}
+%\usepackage{multimedia}
+\usepackage{amsmath} % matrix typesetting
+\usetikzlibrary{matrix}
+\usepackage{hyperref} % links
+
+%% BIBLIOGRAPHY
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\addbibresource{../bibliography/Lecture-10.bib}
+
+%% BEAMER OUTPUT FORMAT
+%\setbeameroption{hide notes} % Only slides
+%\setbeameroption{show only notes} % Only notes
+\setbeameroption{show notes on second screen=right} % Both
+
+%% THEME SETTINGS
+\usetheme{default}
+\usecolortheme{crane}
+\usetheme{uofi}
+
+%% TITLE SLIDE OPTIONS
+\title{Lecture \#10}
+\subtitle{Thresholding}
+\date{\textit{revised \today}}
+\author{Garrett Wells}
+
+
+\begin{document}
+
+%% TITLE SLIDE 
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%% TOC
+\section{Table of Contents}
+\begin{frame}[allowframebreaks]{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+\section{Review}
+\begin{frame}{Review}
+\end{frame}
+
+\begin{frame}{Thresholding}
+    \framesubtitle{\textit{Introduction\dlots}}
+    \centering
+    \begin{tikzpicture}
+        \draw[black, very thick, ->] (yaxis) (-5, 0) -- node[left](-5, 2.5){pixel value} (-5, 5);
+        \draw[black, very thick, ->] (xaxis) (-5, 0) -- (5, 0);
+
+        \draw[blue, very thick] (p3) (-3, 0) -- (-3, 0.8) node[above]{$0.8$};
+        \draw[magenta, very thick] (p1) (-3.5, 0) -- (-3.5, 2) node[above]{$2$};
+        \draw[green, very thick] (p2) (-4, 0) -- (-4, 4) node[above]{$4$};
+    \end{tikzpicture}
+\end{frame}
+
+
+%% MINTED EXAMPLE
+\subsection{Simple}
+\begin{frame}[fragile]{Simple Thresholding}
+    \begin{block}{Simple Thresholding, Generalized}     
+        Applies the same threshold value, $threshold$ to every pixel in the image. 
+        \vspace{0.5cm}
+        \begin{minted}{python}
+if pixel_val >= threshold:
+    pixel_val = upper_bound
+else:
+    pixel_val = lower_bound
+        \end{minted}
+    \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Simple Thresholding}
+  \begin{minted}{python}
+cv.threshold(
+      src,    # source image
+      thresh, # threshold value
+      maxval, # maximum output value
+      type,   # what type of thresholding to use
+    )
+  \end{minted}
+\end{frame}
+
+%% FOOTNOTE/PIFONT EXAMPLE
+\subsubsection{Inverted Binary}
+\begin{frame}{Inverted Binary Threshold}
+    \begin{itemize}
+        \item values over threshold \ding{222} 0
+        \item values below threshold \ding{222} max value
+    \end{itemize}
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\textwidth]{../include/pictures/binary_thresh_wave.png}
+      \caption{Binary Threshold\footnotemark}
+    \end{figure}
+
+    \footnotetext{OpenCV Image Processing \cite{OpenCVMiscellaneousImage}}
+\end{frame}
+
+%% BIBLIOGRAPHY SLIDES
+\begin{frame}[allowframebreaks]{Bibliography}
+\printbibliography
+\end{frame}
+
+\end{document}
